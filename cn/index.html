@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin For The Young - 多语言支持</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #f0f0f0;
+            font-family: 'Exo 2', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(67, 217, 173, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(247, 147, 30, 0.1) 0%, transparent 20%);
+            z-index: -1;
+        }
+        
+        .crypto-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23ffffff"/></svg>');
+            background-size: 15px 15px;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            animation: fadeInDown 1s ease;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .logo-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #f7931a;
+            box-shadow: 0 0 25px rgba(247, 147, 30, 0.7);
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #f7931a 0%, #1C6E4D 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .slogan {
+            font-size: 1.8rem;
+            color: #4dccbd;
+            margin-bottom: 30px;
+            font-weight: 600;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .slogan span {
+            color: linear-gradient(90deg, #f7931a 0%, #1C6E4D 100%);
+            font-weight: 700;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .info-card {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(25, 35, 60, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(247, 147, 30, 0.2);
+        }
+        
+        .info-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: #f7931a;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-card h2 i {
+            margin-right: 10px;
+        }
+        
+        .info-card p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .highlight {
+            background: rgba(247, 147, 30, 0.15);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f7931a;
+            margin: 20px 0;
+        }
+        
+        .buttons-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .action-btn {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .tweet-btn {
+            background: #1da1f2;
+            color: white;
+            box-shadow: 0 5px 15px rgba(29, 161, 242, 0.4);
+        }
+        
+        .learn-btn {
+            background: linear-gradient(90deg, #f7931a, #1C6E4D);
+            color: white;
+            box-shadow: 0 5px 15px rgba(28, 110, 77, 0.4);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(29, 161, 242, 0.6);
+        }
+        
+        .link-section {
+            margin-top: 30px;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .community-link {
+            background: rgba(25, 35, 60, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .community-link:hover {
+            transform: translateY(-5px);
+            background: rgba(247, 147, 30, 0.2);
+            border-color: rgba(247, 147, 30, 0.3);
+        }
+        
+        .link-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            width: 50px;
+            text-align: center;
+        }
+        
+        .link-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #4dccbd;
+        }
+        
+        .link-text p {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .ribbit-link {
+            background: linear-gradient(135deg, #388E3C, #4CAFE3C, #4CAF50);
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        .ribbit-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+            background: rgba(15, 23, 42, 0.7);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .copyright a {
+            color: #4dccbd;
+            text-decoration: none;
+        }
+        
+        .copyright a:hover {
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(247, 147, 30, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(247, 147, 30, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(247, 147, 30, 0);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .bitcoin-chart {
+            width: 100%;
+            height: 200px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            background: rgba(15, 25, 45, 0.5);
+        }
+        
+        .chart-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80%;
+            stroke: #f7931a;
+            stroke-width: 3;
+            fill: none;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 3s ease-out forwards;
+        }
+        
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .slogan {
+                font-size: 1.4rem;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-image {
+                width: 100px;
+                height: 100px;
+            }
+        }
+        .twitter-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(29, 161, 242, 0.4);
+        }
+
+        .vote-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #4CAF50;
+            color: white;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .vote-btn:hover {
+            background: #3d8b40;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+        }
+        
+        /* 多语言选择器样式 */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(25, 35, 60, 0.9);
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(247, 147, 30, 0.3);
+        }
+        
+        .language-selector select {
+            background: rgba(15, 25, 45, 0.7);
+            color: #f0f0f0;
+            border: 1px solid rgba(247, 147, 30, 0.5);
+            border-radius: 6px;
+            padding: 8px 15px;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 200px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23f7931a' d='M1.41.59L6 5.17 10.59.59 12 2 6 8 0 2z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+        }
+        
+        .language-selector select:focus {
+            outline: none;
+            border-color: #f7931a;
+            box-shadow: 0 0 0 2px rgba(247, 147, 30, 0.3);
+        }
+        
+        /* 为阿拉伯语等RTL语言添加支持 */
+        [dir="rtl"] .logo {
+            flex-direction: row-reverse;
+        }
+        
+        [dir="rtl"] .info-card h2 i {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+        
+        [dir="rtl"] .link-icon {
+            margin-right: 0;
+            margin-left: 15px;
+        }
+        
+        [dir="rtl"] .language-selector {
+            right: auto;
+            left: 20px;
+        }
+        
+        /* 语言标签 */
+        .language-label {
+            display: block;
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #4dccbd;
+            font-weight: 600;
+        }
+
+        .logo-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #f7931a;
+            box-shadow: 0 0 25px rgba(247, 147, 30, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <!-- 加密货币背景图案 -->
+    <div class="crypto-bg"></div>
+    
+    <!-- 语言选择器 -->
+    <div class="language-selector">
+        <span class="language-label">选择语言 / Select Language</span>
+        <select id="languageSelector">
+            <option value="en">English (英语)</option>
+            <option value="zh">中文 (Chinese)</option>
+            <option value="es">Español (西班牙语)</option>
+            <option value="ar">العربية (阿拉伯语)</option>
+            <option value="hi">हिन्दी (印地语)</option>
+            <option value="pt">Português (葡萄牙语)</option>
+            <option value="ru">Русский (俄语)</option>
+            <option value="ja">日本語 (日语)</option>
+            <option value="de">Deutsch (德语)</option>
+            <option value="fr">Français (法语)</option>
+        </select>
+    </div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 页头部分 -->
+        <header>
+            <div class="logo">
+                <!-- 本地图片pep.jpg -->
+                <img src="pep.jpg" alt="Bitcoin for the Young" class="logo-image">
+                <!-- 主标题 -->
+                <h1>
+                    Bitcoin For The <span class="title-young">Young</span>
+                </h1>
+            </div>
+            <!-- 标语 -->
+            <!-- <p class="slogan"><span>Forever Passionate, Forever Young!</span></p> -->
+        </header>
+        
+        <!-- 比特币图表区域 -->
+        <div class="bitcoin-chart">
+            <!-- SVG绘制的比特币价格趋势图 -->
+            <svg class="chart-line" viewBox="0 0 500 200" preserveAspectRatio="none">
+                <!-- 路径数据模拟价格波动 -->
+                <path d="M0,170 C50,100 100,140 150,120 C200,100 250,160 300,130 C350,100 400,150 450,120 C500,90 500,90 500,90" />
+            </svg>
+        </div>
+        
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <!-- 左侧信息卡片：口号 -->
+            <div class="info-card">
+                <h2><i class="fas fa-hashtag"></i> <span class="i18n" data-key="slogan_title">Our Slogan</span></h2>
+                <p class="i18n" data-key="slogan_desc">Click Tweet Now below, and it will automatically fill the slogan into the tweet!</p>
+                <!-- 高亮显示的口号 -->
+                <div class="highlight">
+                    <p style="font-size: 1.8rem; text-align: center; font-weight: 700; color: #f7931a;">
+                        #BitcoinForTheYoung
+                    </p>
+                </div>
+                <p class="i18n" data-key="slogan_text">We honor passionate souls plunging into their loves. Forever Passionate, Forever Young!</p>
+                
+                <!-- 按钮容器 -->
+                <div class="buttons-container">
+                    <!-- 推特分享按钮 -->
+                    <a href="https://twitter.com/intent/tweet?text=%23BitcoinForTheYoung%20%0AJoin%20the%20movement!%20%E2%9A%A1%EF%B8%8F%0ABitcoinForTheYoung.com%20%0A" 
+                       class="action-btn tweet-btn pulse" target="_blank">
+                        <i class="fab fa-twitter"></i> <span class="i18n" data-key="tweet_btn">Tweet Now</span>
+                    </a>
+                    
+                    <!-- 学习按钮 -->
+                    <a href="https://bitcointalk.org/index.php?topic=5483505.0" class="action-btn learn-btn">
+                        <i class="fas fa-book"></i> <span class="i18n" data-key="learn_btn">Learn Pepecoin</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 右侧信息卡片：愿景 -->
+            <div class="info-card">
+                <h2><i class="fas fa-bullseye"></i> <span class="i18n" data-key="vision_title">Our Vision</span></h2>
+                <p class="i18n" data-key="vision_desc">In the near future, our pond will become the center and focus of the entire cryptocurrency market. Bitcoin for the young！</p>
+                
+                <!-- 高亮显示的链接 -->
+                <div class="highlight">
+                    <p style="text-align: center; font-size: 1.5rem; margin-top: 10px; font-weight: 700;">
+                        <a href="https://BitcoinForTheYoung.com" style="color: #f7931a; text-decoration: none;">BitcoinForTheYoung.com</a>
+                    </p>
+                </div>
+
+                <p class="i18n" data-key="vote_reminder">Vote on Capitoday every day!</p>
+                <!-- 按钮容器 -->
+                <div class="buttons-container">
+                    <!-- 投票按钮 -->
+                    <a href="https://capitoday.com/meme/pepecoin-network" 
+                    class="action-btn vote-btn pulse" target="_blank">
+                        <i class="fas fa-vote-yea"></i> <span class="i18n" data-key="vote_btn">Vote Now</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 社区链接区域 -->
+        <div class="link-section">
+            <h2><i class="fas fa-link"></i> <span class="i18n" data-key="community_title">Community Links</span></h2>
+            <!-- 链接网格布局 -->
+            <div class="links-grid">
+                <!-- 官网链接 -->
+                <a href="http://pepecoin.com" class="community-link" target="_blank">
+                    <div class="link-icon"><i class="fas fa-globe" style="color: #4dccbd;"></i></div>
+                    <div class="link-text">
+                        <h3 class="i18n" data-key="official_website">Official Website</h3>
+                        <p>Pepecoin.com</p>
+                    </div>
+                </a>
+                
+                <!-- 推特链接 -->
+                <a href="https://x.com/pepecoinnetwork" class="community-link twitter-link" target="_blank">
+                    <div class="link-icon"><i class="fab fa-twitter" style="color: #1DA1F2;"></i></div>
+                    <div class="link-text">
+                        <h3 class="i18n" data-key="twitter">Twitter</h3>
+                        <p>Pepecoin</p>
+                    </div>
+                </a>
+                
+                <!-- Reddit链接 -->
+                <a href="https://reddit.com/r/pepecoin" class="community-link" target="_blank">
+                    <div class="link-icon"><i class="fab fa-reddit-alien" style="color: #ff4500;"></i></div>
+                    <div class="link-text">
+                        <h3 class="i18n" data-key="reddit">Reddit</h3>
+                        <p>r/Pepecoin</p>
+                    </div>
+                </a>
+                
+                <!-- Discord链接 -->
+                <a href="https://discord.gg/Pepecoin" class="community-link" target="_blank">
+                    <div class="link-icon"><i class="fab fa-discord" style="color: #7289da;"></i></div>
+                    <div class="link-text">
+                        <h3 class="i18n" data-key="discord">Discord</h3>
+                        <p>r/Pepecoin</p>
+                    </div>
+                </a>
+                
+                <!-- Telegram链接 -->
+                <a href="https://t.me/PepecoinGroup" class="community-link" target="_blank">
+                    <div class="link-icon"><i class="fab fa-telegram" style="color: #0088cc;"></i></div>
+                    <div class="link-text">
+                        <h3 class="i18n" data-key="telegram">Telegram</h3>
+                        <p>t.me/PepecoinGroup</p>
+                    </div>
+                </a>
+                
+                <!-- 中文社区链接 -->
+                <a href="https://t.me/PepecoinChineseGroup" class="community-link chinese-link" target="_blank">
+                    <div class="link-icon"><i class="fas fa-users" style="color: #f7931a;"></i></div>
+                    <div class="link-text">
+                        <h3>PEP中文社区</h3>
+                        <p></p>
+                    </div>
+                </a>
+
+                <!-- ribbitraiders链接 -->
+                <a href="https://ribbitraiders.com" class="community-link ribbit-link" target="_blank">
+                    <div class="link-icon"><i class="fas fa-frog" style="color: #4CAF50;"></i></div>
+                    <div class="link-text">
+                        <h3 class="i18n" data-key="ribbit">Ribbit Raiders</h3>
+                        <p>Ribbitraiders.com</p>
+                    </div>
+                </a> 
+
+                 <!-- 中文envo社区链接 -->
+                <a href="https://share.envo.social/?channelCode=Envo&type=1&id=63ov7ws2k&i18n=zh" class="community-link chinese-link" target="_blank">
+                    <div class="link-icon"><i class="fas fa-users" style="color: #82c8e1;"></i></div>
+                    <div class="link-text">
+                        <h3>PEP中文社区(Envo)</h3>
+                        <p></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 区块链教育区域 -->
+        <div class="link-section">
+            <h2><i class="fas fa-link"></i> <span class="i18n" data-key="education_title">Blockchain Education</span></h2>
+            <!-- 链接网格布局 -->
+            <div class="links-grid">
+                <!-- 比特币教育 -->
+                <a href="https://educate.bitcoinfortheyoung.com/" class="community-link" target="_blank">
+                    <div class="link-icon"><i class="fas fa-graduation-cap" style="color: #9ac0d6;"></i></div>
+                    <div class="link-text">
+                        <h3 class="i18n" data-key="bitcoin_edu">Bitcoin Education</h3>
+                        <p class="i18n" data-key="bitcoin_desc">Learn Bitcoin</p>
+                    </div>
+                </a>
+    
+                <a href="https://download.bitcoinfortheyoung.com/" class="community-link" target="_blank">
+                    <div class="link-icon"><i class="fas fa-graduation-cap" style="color: #dba334;"></i></div>
+                    <div class="link-text">
+                        <h3>PEP新人手册</h3>
+                        <p></p>
+                    </div>
+                </a>   
+            </div>
+        </div>
+
+        <!-- 友好链接区域 -->
+        <div class="link-section">
+            <h2><i class="fas fa-link"></i> <span class="i18n" data-key="friendly_title">Friendly Links</span></h2>
+            <!-- 链接网格布局 -->
+            <div class="links-grid">
+                <!-- Bellscoin社区 -->
+                <a href="http://bellscoin.com" class="community-link" target="_blank">
+                    <div class="link-icon"><i class="fas fa-globe" style="color: #4dccbd;"></i></div>
+                    <div class="link-text">
+                        <h3 class="i18n" data-key="bellscoin">Bellscoin Community</h3>
+                        <p>Bellscoin.com</p>
+                    </div>
+                </a>
+
+                <!-- BIT交易所 -->
+                <a href="http://bit.com" class="community-link" target="_blank">
+                    <div class="link-icon"><i class="fas fa-globe" style="color: #4dccbd;"></i></div>
+                    <div class="link-text">
+                        <h3 class="i18n" data-key="bit_exchange">BIT Crypto Exchange</h3>
+                        <p>Bit.com</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚部分 -->
+    <footer>
+        <p class="copyright">
+            <span class="i18n" data-key="copyright">© 2025 Bitcoin For The Young Community | Follow me on</span> 
+            <a href="https://x.com/nlaoshicom" target="_blank">Twitter</a> | 
+            <a href="https://github.com/pxps/bitcoinfortheyoung.com" target="_blank">Github</a>
+        </p>
+    </footer>
+
+    <script>
+        // 多语言翻译资源
+        const translations = {
+            en: {
+                slogan_title: "Our Slogan",
+                slogan_desc: "Click Tweet Now below, and it will automatically fill the slogan into the tweet!",
+                slogan_text: "We honor passionate souls plunging into their loves. Forever Passionate, Forever Young!",
+                tweet_btn: "Tweet Now",
+                learn_btn: "Learn Pepecoin",
+                vision_title: "Our Vision",
+                vision_desc: "In the near future, our pond will become the center and focus of the entire cryptocurrency market. Bitcoin for the young！",
+                vote_reminder: "Vote on Capitoday every day!",
+                vote_btn: "Vote Now",
+                community_title: "Community Links",
+                official_website: "Official Website",
+                twitter: "Twitter",
+                reddit: "Reddit",
+                discord: "Discord",
+                telegram: "Telegram",
+                ribbit: "Ribbit Raiders",
+                education_title: "Blockchain Education",
+                bitcoin_edu: "Bitcoin Education",
+                bitcoin_desc: "Learn Bitcoin",
+                friendly_title: "Friendly Links",
+                bellscoin: "Bellscoin Community",
+                bit_exchange: "BIT Crypto Exchange",
+                copyright: "© 2025 Bitcoin For The Young Community | Follow me on"
+            },
+            zh: {
+                slogan_title: "我们的口号",
+                slogan_desc: "点击下面的'立即发推'按钮，它会自动将口号填入推文！",
+                slogan_text: "我们致敬那些投身于所爱的热情灵魂。永远热情，永远年轻！",
+                tweet_btn: "立即发推",
+                learn_btn: "学习PEP",
+                vision_title: "我们的愿景",
+                vision_desc: "在不久的将来，我们的池塘将成为整个加密货币市场的中心和焦点。年轻人的比特币！",
+                vote_reminder: "每天在Capitoday上投票！",
+                vote_btn: "立即投票",
+                community_title: "社区链接",
+                official_website: "官方网站",
+                twitter: "推特",
+                reddit: "Reddit社区",
+                discord: "Discord社区",
+                telegram: "电报群",
+                ribbit: "Ribbit Raiders",
+                education_title: "区块链教育",
+                bitcoin_edu: "比特币教育",
+                bitcoin_desc: "学习比特币",
+                friendly_title: "友情链接",
+                bellscoin: "Bellscoin社区",
+                bit_exchange: "BIT交易所",
+                copyright: "© 2025 年轻人的比特币社区 | 关注我"
+            },
+            es: {
+                slogan_title: "Nuestro Lema",
+                slogan_desc: "Haz clic en 'Twittear ahora' y se completará automáticamente el lema en el tweet.",
+                slogan_text: "Honramos a las almas apasionadas que se sumergen en sus amores. ¡Siempre apasionados, siempre jóvenes!",
+                tweet_btn: "Twittear ahora",
+                learn_btn: "Aprender Pepecoin",
+                vision_title: "Nuestra Visión",
+                vision_desc: "En un futuro cercano, nuestro estanque será el centro y foco de todo el mercado de criptomonedas. ¡Bitcoin para los jóvenes!",
+                vote_reminder: "¡Vota en Capitoday todos los días!",
+                vote_btn: "Votar ahora",
+                community_title: "Enlaces de la Comunidad",
+                official_website: "Sitio Oficial",
+                twitter: "Twitter",
+                reddit: "Reddit",
+                discord: "Discord",
+                telegram: "Telegram",
+                ribbit: "Ribbit Raiders",
+                education_title: "Educación Blockchain",
+                bitcoin_edu: "Educación Bitcoin",
+                bitcoin_desc: "Aprende Bitcoin",
+                friendly_title: "Enlaces Amigos",
+                bellscoin: "Comunidad Bellscoin",
+                bit_exchange: "Exchange BIT",
+                copyright: "© 2025 Comunidad Bitcoin para los Jóvenes | Sígueme en"
+            },
+            ar: {
+                slogan_title: "شعارنا",
+                slogan_desc: "انقر فوق 'تغريد الآن' وسيتم ملء الشعار تلقائيًا في التغريدة!",
+                slogan_text: "نكرم الأرواح الشغوفة التي تندفع في حبها. شغوف إلى الأبد، شاب إلى الأبد!",
+                tweet_btn: "تغريد الآن",
+                learn_btn: "تعلم Pepecoin",
+                vision_title: "رؤيتنا",
+                vision_desc: "في المستقبل القريب، ستصبح بركتنا مركز وبؤرة سوق العملات المشفرة بأكمله. بيتكوين للشباب!",
+                vote_reminder: "صوت على Capitoday كل يوم!",
+                vote_btn: "صوت الآن",
+                community_title: "روابط المجتمع",
+                official_website: "الموقع الرسمي",
+                twitter: "تويتر",
+                reddit: "ريديت",
+                discord: "ديسكورد",
+                telegram: "تيليجرام",
+                ribbit: "Ribbit Raiders",
+                education_title: "تعليم البلوكشين",
+                bitcoin_edu: "تعليم البيتكوين",
+                bitcoin_desc: "تعلم البيتكوين",
+                friendly_title: "روابط صديقة",
+                bellscoin: "مجتمع Bellscoin",
+                bit_exchange: "تبادل BIT",
+                copyright: "© 2025 مجتمع بيتكوين للشباب | تابعني على"
+            },
+            hi: {
+                slogan_title: "हमारा नारा",
+                slogan_desc: "नीचे 'ट्वीट नाउ' पर क्लिक करें और यह अपने आप ट्वीट में नारा भर देगा!",
+                slogan_text: "हम अपने प्यार में डूबे जुनूनी दिलों का सम्मान करते हैं। हमेशा जुनूनी, हमेशा जवान!",
+                tweet_btn: "अभी ट्वीट करें",
+                learn_btn: "पीपकोइन सीखें",
+                vision_title: "हमारी दृष्टि",
+                vision_desc: "निकट भविष्य में, हमारा तालाब पूरे क्रिप्टोकरेंसी बाजार का केंद्र और फोकस बन जाएगा। युवाओं के लिए बिटकॉइन!",
+                vote_reminder: "हर रोज़ कैपिटोडे पर वोट करें!",
+                vote_btn: "अभी वोट करें",
+                community_title: "समुदाय लिंक",
+                official_website: "आधिकारिक वेबसाइट",
+                twitter: "ट्विटर",
+                reddit: "रेडिट",
+                discord: "डिस्कॉर्ड",
+                telegram: "टेलीग्राम",
+                ribbit: "रिबिट रेडर्स",
+                education_title: "ब्लॉकचेन शिक्षा",
+                bitcoin_edu: "बिटकॉइन शिक्षा",
+                bitcoin_desc: "बिटकॉइन सीखें",
+                friendly_title: "मित्रवत लिंक",
+                bellscoin: "बेल्सकॉइन समुदाय",
+                bit_exchange: "BIT क्रिप्टो एक्सचेंज",
+                copyright: "© 2025 युवाओं के लिए बिटकॉइन समुदाय | मुझे फॉलो करें"
+            },
+            pt: {
+                slogan_title: "Nosso Lema",
+                slogan_desc: "Clique em 'Tweetar Agora' e ele preencherá automaticamente o lema no tweet!",
+                slogan_text: "Honramos almas apaixonadas que mergulham em seus amores. Para sempre apaixonados, para sempre jovens!",
+                tweet_btn: "Tweetar Agora",
+                learn_btn: "Aprender Pepecoin",
+                vision_title: "Nossa Visão",
+                vision_desc: "Em um futuro próximo, nosso lago se tornará o centro e foco de todo o mercado de criptomoedas. Bitcoin para os jovens!",
+                vote_reminder: "Vote no Capitoday todos os dias!",
+                vote_btn: "Votar Agora",
+                community_title: "Links da Comunidade",
+                official_website: "Site Oficial",
+                twitter: "Twitter",
+                reddit: "Reddit",
+                discord: "Discord",
+                telegram: "Telegram",
+                ribbit: "Ribbit Raiders",
+                education_title: "Educação Blockchain",
+                bitcoin_edu: "Educação Bitcoin",
+                bitcoin_desc: "Aprenda Bitcoin",
+                friendly_title: "Links Amigáveis",
+                bellscoin: "Comunidade Bellscoin",
+                bit_exchange: "Exchange BIT",
+                copyright: "© 2025 Comunidade Bitcoin Para os Jovens | Siga-me"
+            },
+            ru: {
+                slogan_title: "Наш Девиз",
+                slogan_desc: "Нажмите 'Твитнуть сейчас', и девиз автоматически заполнится в твите!",
+                slogan_text: "Мы чтим страстные души, погружающиеся в свои увлечения. Вечно страстные, вечно молодые!",
+                tweet_btn: "Твитнуть сейчас",
+                learn_btn: "Изучить Pepecoin",
+                vision_title: "Наше Видение",
+                vision_desc: "В ближайшем будущем наш пруд станет центром и фокусом всего рынка криптовалют. Биткоин для молодых!",
+                vote_reminder: "Голосуйте на Capitoday каждый день!",
+                vote_btn: "Голосовать сейчас",
+                community_title: "Ссылки Сообщества",
+                official_website: "Официальный сайт",
+                twitter: "Твиттер",
+                reddit: "Реддит",
+                discord: "Дискорд",
+                telegram: "Телеграм",
+                ribbit: "Ribbit Raiders",
+                education_title: "Обучение Блокчейну",
+                bitcoin_edu: "Обучение Биткоину",
+                bitcoin_desc: "Изучите Биткоин",
+                friendly_title: "Дружественные Ссылки",
+                bellscoin: "Сообщество Bellscoin",
+                bit_exchange: "Биржа BIT",
+                copyright: "© 2025 Сообщество Биткоин для Молодых | Следуй за мной"
+            },
+            ja: {
+                slogan_title: "私たちのスローガン",
+                slogan_desc: "「今すぐツイート」をクリックすると、スローガンが自動的にツイートに挿入されます！",
+                slogan_text: "私たちは、自分の愛に没頭する情熱的な魂を称えます。永遠に情熱的で、永遠に若く！",
+                tweet_btn: "今すぐツイート",
+                learn_btn: "Pepecoinを学ぶ",
+                vision_title: "私たちのビジョン",
+                vision_desc: "近い将来、私たちの池は暗号通貨市場全体の中心と焦点になります。若者のためのビットコイン！",
+                vote_reminder: "毎日Capitodayで投票してください！",
+                vote_btn: "今すぐ投票",
+                community_title: "コミュニティリンク",
+                official_website: "公式ウェブサイト",
+                twitter: "ツイッター",
+                reddit: "レディット",
+                discord: "ディスコード",
+                telegram: "テレグラム",
+                ribbit: "リビットレイダーズ",
+                education_title: "ブロックチェーン教育",
+                bitcoin_edu: "ビットコイン教育",
+                bitcoin_desc: "ビットコインを学ぶ",
+                friendly_title: "フレンドリーリンク",
+                bellscoin: "ベルスコインコミュニティ",
+                bit_exchange: "BIT取引所",
+                copyright: "© 2025 若者のためのビットコインコミュニティ | フォローする"
+            },
+            de: {
+                slogan_title: "Unser Motto",
+                slogan_desc: "Klicken Sie auf 'Jetzt twittern' und das Motto wird automatisch in den Tweet eingefügt!",
+                slogan_text: "Wir ehren leidenschaftliche Seelen, die sich in ihre Lieben stürzen. Für immer leidenschaftlich, für immer jung!",
+                tweet_btn: "Jetzt twittern",
+                learn_btn: "Pepecoin lernen",
+                vision_title: "Unsere Vision",
+                vision_desc: "In naher Zukunft wird unser Teich das Zentrum und der Fokus des gesamten Kryptowährungsmarktes sein. Bitcoin für die Jugend!",
+                vote_reminder: "Täglich auf Capitoday abstimmen!",
+                vote_btn: "Jetzt abstimmen",
+                community_title: "Community-Links",
+                official_website: "Offizielle Website",
+                twitter: "Twitter",
+                reddit: "Reddit",
+                discord: "Discord",
+                telegram: "Telegram",
+                ribbit: "Ribbit Raiders",
+                education_title: "Blockchain-Bildung",
+                bitcoin_edu: "Bitcoin-Bildung",
+                bitcoin_desc: "Bitcoin lernen",
+                friendly_title: "Freundliche Links",
+                bellscoin: "Bellscoin-Community",
+                bit_exchange: "BIT-Kryptobörse",
+                copyright: "© 2025 Bitcoin für die Jugend Gemeinschaft | Folge mir auf"
+            },
+            fr: {
+                slogan_title: "Notre Slogan",
+                slogan_desc: "Cliquez sur 'Tweeter maintenant' et le slogan sera automatiquement rempli dans le tweet!",
+                slogan_text: "Nous honorons les âmes passionnées qui plongent dans leurs amours. Toujours passionné, toujours jeune!",
+                tweet_btn: "Tweeter maintenant",
+                learn_btn: "Apprendre Pepecoin",
+                vision_title: "Notre Vision",
+                vision_desc: "Dans un avenir proche, notre étang deviendra le centre et le point focal de tout le marché des cryptomonnaies. Bitcoin pour les jeunes!",
+                vote_reminder: "Votez sur Capitoday tous les jours!",
+                vote_btn: "Voter maintenant",
+                community_title: "Liens Communautaires",
+                official_website: "Site Officiel",
+                twitter: "Twitter",
+                reddit: "Reddit",
+                discord: "Discord",
+                telegram: "Telegram",
+                ribbit: "Ribbit Raiders",
+                education_title: "Éducation Blockchain",
+                bitcoin_edu: "Éducation Bitcoin",
+                bitcoin_desc: "Apprendre le Bitcoin",
+                friendly_title: "Liens Amicaux",
+                bellscoin: "Communauté Bellscoin",
+                bit_exchange: "Exchange BIT",
+                copyright: "© 2025 Communauté Bitcoin pour les Jeunes | Suivez-moi sur"
+            }
+        };
+
+        // 设置当前语言
+        let currentLang = 'en';
+        
+        // 语言切换功能
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // 更新语言选择器的值
+            document.getElementById('languageSelector').value = lang;
+            
+            // 设置文档方向（针对阿拉伯语）
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.documentElement.dir = 'ltr';
+            }
+            
+            // 翻译页面文本
+            document.querySelectorAll('.i18n').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+        
+        // 初始化语言设置
+        document.addEventListener('DOMContentLoaded', () => {
+            // 从本地存储获取语言设置
+            const savedLang = localStorage.getItem('siteLanguage');
+            if (savedLang) {
+                setLanguage(savedLang);
+            } else {
+                // 尝试使用浏览器语言
+                const browserLang = navigator.language.substring(0, 2);
+                if (translations[browserLang]) {
+                    setLanguage(browserLang);
+                } else {
+                    setLanguage('en');
+                }
+            }
+            
+            // 添加语言切换事件
+            document.getElementById('languageSelector').addEventListener('change', function() {
+                const lang = this.value;
+                localStorage.setItem('siteLanguage', lang);
+                setLanguage(lang);
+            });
+        });
+    </script>
+</body>
+</html>
